@@ -64,13 +64,13 @@ class HumanoidCharacter(object):
 
     def get_funky(self):
         self.right_arm_angles[0] += 1
-        self.right_arm_angles[1] += 1
+        self.right_arm_angles[1] -= 1
         self.left_arm_angles[0] += 1
-        self.left_arm_angles[1] += 1
+        self.left_arm_angles[1] -= 1
         self.right_leg_angles[0] += 1
-        self.right_leg_angles[1] += 1
+        self.right_leg_angles[1] -= 1
         self.left_leg_angles[0] += 1
-        self.left_leg_angles[1] += 1
+        self.left_leg_angles[1] -= 1
 
 
 main_character = HumanoidCharacter(400, 500, 400, gameDisplay)
@@ -84,6 +84,6 @@ while run:
     main_character.get_funky()
     main_character.draw()
     pygame.display.update()
-    clock.tick(10)
+    clock.tick(30)
 
 pygame.quit()
