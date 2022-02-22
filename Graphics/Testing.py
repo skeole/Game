@@ -36,12 +36,16 @@ while run:
             run = False
 
     gameDisplay.fill((255, 0, 0))
-    character.draw()
+    character.get_funky()
     character.update_hand_and_leg_positions()
     angle += 1
     weapon.move(character.right_hand_x, character.right_hand_y, angle)
+
+    character.draw()
     weapon.draw()
+
     pygame.display.update()
+
     clock.tick(25)
 
 pygame.quit()

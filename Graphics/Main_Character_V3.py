@@ -65,6 +65,15 @@ class HumanoidCharacter(object):
         self.right_hand_x = self.x+(self.torso_width/2)+self.right_arm_lengths[0]*math.cos(self.right_arm_angles[0]/180.0 * math.pi)+0.8*self.right_arm_lengths[1]*math.cos((self.right_arm_angles[0]+self.right_arm_angles[1])*math.pi/180.0)
         self.right_hand_y = self.y-self.right_arm_height-self.right_arm_lengths[0]*math.sin(self.right_arm_angles[0]/180.0 * math.pi)-0.8*self.right_arm_lengths[1]*math.sin((self.right_arm_angles[0]+self.right_arm_angles[1])*math.pi/180.0)
 
+    def get_funky(self): #only for testing
+        self.right_arm_angles[0] += 1
+        self.right_arm_angles[1] -= 1
+        self.left_arm_angles[0] += 1
+        self.left_arm_angles[1] -= 1
+        self.right_leg_angles[0] += 1
+        self.right_leg_angles[1] -= 1
+        self.left_leg_angles[0] += 1
+        self.left_leg_angles[1] -= 1
 #ideas for improvement:
 #make it so the character doesnt float - legs should always touch ground
 #head more round
