@@ -1,17 +1,13 @@
 import pygame
 import math
 
-pygame.init()
-gameDisplay = pygame.display.set_mode((800, 600))
-clock = pygame.time.Clock()
-
 black = (0, 0, 0)
 
-def draw_centered_rectangle(x_center, y_center, width, height, color, surface=gameDisplay, fill=0, border_radius=0.0):
+def draw_centered_rectangle(x_center, y_center, width, height, color, surface, fill=0, border_radius=0.0):
     #fill: 0 if fully filled, >1 for line thickness
     pygame.draw.rect(surface, color, [int(x_center - (width/2)), int(y_center - (height/2)), int(width), int(height)], width=int(fill), border_radius=int(border_radius))
 
-def draw_line(x_start, y_start, angle, length, color, surface=gameDisplay, width=1):
+def draw_line(x_start, y_start, angle, length, color, surface, width=1):
     angle_in_radians = angle/180.0 * math.pi
     pygame.draw.circle(surface, color, (int(x_start), int(y_start+1)), int(width/2-1))
     pygame.draw.circle(surface, color, (int(x_start + length*math.cos(angle_in_radians)), int(y_start - length*math.sin(angle_in_radians)+1)), int(width/2-1))
@@ -68,22 +64,3 @@ class Sword(object):
                                                               (self.x+(self.handle_height/2.0+self.handlebar_height)*math.cos(self.angle)-(0-self.handlebar_width/2.0)*math.sin(self.angle), self.y+(0-self.handlebar_width/2.0)*math.cos(self.angle)+(self.handle_height/2.0+self.handlebar_height)*math.sin(self.angle)),
                                                               (self.x+(self.handle_height/2.0+self.handlebar_height)*math.cos(self.angle)-(self.handlebar_width/2.0)*math.sin(self.angle), self.y+(self.handlebar_width/2.0)*math.cos(self.angle)+(self.handle_height/2.0+self.handlebar_height)*math.sin(self.angle))])
         #ideas for improvement: make the sword 2 halves, add a line going down the middle, more handle designs
-
-
-weapon = Sword(100, 10, gameDisplay)
-weapon.move(400, 300, 0)
-
-angle = 0
-run = True
-while run:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-    gameDisplay.fill((255, 255, 255))
-    weapon.move(400, 300, angle)
-    angle += 1
-    weapon.draw()
-    pygame.display.update()
-    clock.tick(25)
-
-pygame.quit()

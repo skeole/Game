@@ -1,14 +1,11 @@
 import pygame
 import math
 
-pygame.init()
-gameDisplay = pygame.display.set_mode((800, 600))
-clock = pygame.time.Clock()
-def draw_centered_rectangle(x_center, y_center, width, height, color, surface=gameDisplay, fill=0, border_radius=0.0):
+def draw_centered_rectangle(x_center, y_center, width, height, color, surface, fill=0, border_radius=0.0):
     #fill: 0 if fully filled, >1 for line thickness
     pygame.draw.rect(surface, color, [int(x_center - (width/2)), int(y_center - (height/2)), int(width), int(height)], width=int(fill), border_radius=int(border_radius))
 
-def draw_line(x_start, y_start, angle, length, color, surface=gameDisplay, width=1):
+def draw_line(x_start, y_start, angle, length, color, surface, width=1):
     angle_in_radians = angle/180.0 * math.pi
     pygame.draw.circle(surface, color, (int(x_start), int(y_start+1)), int(width/2-1))
     pygame.draw.circle(surface, color, (int(x_start + length*math.cos(angle_in_radians)), int(y_start - length*math.sin(angle_in_radians)+1)), int(width/2-1))
@@ -48,19 +45,19 @@ class HumanoidCharacter(object):
 
     def draw(self):
         #torso
-        draw_centered_rectangle(self.x, self.y-self.height+self.torso_height/2+self.head_height, self.torso_width, self.torso_height, self.torso_color, surface=self.surface)
+        draw_centered_rectangle(self.x, self.y-self.height+self.torso_height/2+self.head_height, self.torso_width, self.torso_height, self.torso_color, self.surface)
         #head
-        draw_centered_rectangle(self.x, self.y-self.height+self.head_height/2, self.torso_width, self.head_height, self.head_color, surface=self.surface)
+        draw_centered_rectangle(self.x, self.y-self.height+self.head_height/2, self.torso_width, self.head_height, self.head_color, self.surface)
         #arms
-        draw_line(self.x+(self.torso_width/2), self.y-self.right_arm_height, self.right_arm_angles[0], self.right_arm_lengths[0], self.arm_color, width=self.arm_width)
-        draw_line(self.x+(self.torso_width/2)+self.right_arm_lengths[0]*math.cos(self.right_arm_angles[0]/180.0 * math.pi), self.y-self.right_arm_height-self.right_arm_lengths[0]*math.sin(self.right_arm_angles[0]/180.0 * math.pi), self.right_arm_angles[0]+self.right_arm_angles[1], self.right_arm_lengths[1], self.arm_color, width=self.arm_width)
-        draw_line(self.x-(self.torso_width/2), self.y-self.left_arm_height, -self.left_arm_angles[0], -self.left_arm_lengths[0], self.arm_color, width=self.arm_width)
-        draw_line(self.x-(self.torso_width/2)-self.left_arm_lengths[0]*math.cos(self.left_arm_angles[0]/180.0 * math.pi), self.y-self.left_arm_height-self.left_arm_lengths[0]*math.sin(self.left_arm_angles[0]/180.0 * math.pi), self.left_arm_angles[0]+self.left_arm_angles[1], self.left_arm_lengths[1], self.arm_color, width=self.arm_width)
+        draw_line(self.x+(self.torso_width/2), self.y-self.right_arm_height, self.right_arm_angles[0], self.right_arm_lengths[0], self.arm_color, self.surface, width=self.arm_width)
+        draw_line(self.x+(self.torso_width/2)+self.right_arm_lengths[0]*math.cos(self.right_arm_angles[0]/180.0 * math.pi), self.y-self.right_arm_height-self.right_arm_lengths[0]*math.sin(self.right_arm_angles[0]/180.0 * math.pi), self.right_arm_angles[0]+self.right_arm_angles[1], self.right_arm_lengths[1], self.arm_color, self.surface, width=self.arm_width)
+        draw_line(self.x-(self.torso_width/2), self.y-self.left_arm_height, -self.left_arm_angles[0], -self.left_arm_lengths[0], self.arm_color, self.surface, width=self.arm_width)
+        draw_line(self.x-(self.torso_width/2)-self.left_arm_lengths[0]*math.cos(self.left_arm_angles[0]/180.0 * math.pi), self.y-self.left_arm_height-self.left_arm_lengths[0]*math.sin(self.left_arm_angles[0]/180.0 * math.pi), self.left_arm_angles[0]+self.left_arm_angles[1], self.left_arm_lengths[1], self.arm_color, self.surface, width=self.arm_width)
         #legs; mid tier
-        draw_line(self.x+(self.leg_distance_apart/2), self.y-self.height+self.head_height+self.torso_height, self.right_leg_angles[0], self.right_leg_lengths[0], self.leg_color, width=self.leg_width)
-        draw_line(self.x+(self.leg_distance_apart/2)+self.right_leg_lengths[0]*math.cos(self.right_leg_angles[0]/180.0 * math.pi), self.y-self.height+self.head_height+self.torso_height-self.right_leg_lengths[0]*math.sin(self.right_leg_angles[0]/180.0 * math.pi), self.right_leg_angles[0]+self.right_leg_angles[1], self.right_leg_lengths[1], self.leg_color, width=self.leg_width)
-        draw_line(self.x-(self.leg_distance_apart/2), self.y-self.height+self.head_height+self.torso_height, -self.left_leg_angles[0], -self.left_leg_lengths[0], self.leg_color, width=self.leg_width)
-        draw_line(self.x-(self.leg_distance_apart/2)-self.left_leg_lengths[0]*math.cos(self.left_leg_angles[0]/180.0 * math.pi), self.y-self.height+self.head_height+self.torso_height-self.left_leg_lengths[0]*math.sin(self.left_leg_angles[0]/180.0 * math.pi), self.left_leg_angles[0]+self.left_leg_angles[1], self.left_leg_lengths[1], self.leg_color, width=self.leg_width)
+        draw_line(self.x+(self.leg_distance_apart/2), self.y-self.height+self.head_height+self.torso_height, self.right_leg_angles[0], self.right_leg_lengths[0], self.leg_color, self.surface, width=self.leg_width)
+        draw_line(self.x+(self.leg_distance_apart/2)+self.right_leg_lengths[0]*math.cos(self.right_leg_angles[0]/180.0 * math.pi), self.y-self.height+self.head_height+self.torso_height-self.right_leg_lengths[0]*math.sin(self.right_leg_angles[0]/180.0 * math.pi), self.right_leg_angles[0]+self.right_leg_angles[1], self.right_leg_lengths[1], self.leg_color, self.surface, width=self.leg_width)
+        draw_line(self.x-(self.leg_distance_apart/2), self.y-self.height+self.head_height+self.torso_height, -self.left_leg_angles[0], -self.left_leg_lengths[0], self.leg_color, self.surface, width=self.leg_width)
+        draw_line(self.x-(self.leg_distance_apart/2)-self.left_leg_lengths[0]*math.cos(self.left_leg_angles[0]/180.0 * math.pi), self.y-self.height+self.head_height+self.torso_height-self.left_leg_lengths[0]*math.sin(self.left_leg_angles[0]/180.0 * math.pi), self.left_leg_angles[0]+self.left_leg_angles[1], self.left_leg_lengths[1], self.leg_color, self.surface, width=self.leg_width)
 
     def get_funky(self):
         self.right_arm_angles[0] += 1
@@ -71,22 +68,6 @@ class HumanoidCharacter(object):
         self.right_leg_angles[1] -= 1
         self.left_leg_angles[0] += 1
         self.left_leg_angles[1] -= 1
-
-
-main_character = HumanoidCharacter(400, 500, 400, gameDisplay)
-
-run = True
-while run:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-    gameDisplay.fill((0, 0, 0))
-    main_character.get_funky()
-    main_character.draw()
-    pygame.display.update()
-    clock.tick(30)
-
-pygame.quit()
 
 #ideas for improvement:
 #make it so the character doesnt float - legs should always touch ground
