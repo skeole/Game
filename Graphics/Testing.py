@@ -1,7 +1,10 @@
 import pygame
 import math
 
+
+
 pygame.init()
+
 gameDisplay = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
@@ -19,7 +22,62 @@ def draw_line(x_start, y_start, angle, length, color, surface=gameDisplay, width
     pygame.draw.circle(surface, color, (int(x_start + length*math.cos(angle_in_radians))+2, int(y_start - length*math.sin(angle_in_radians)+2)), int(width/2-1))
     pygame.draw.line(surface, color, (int(x_start), int(y_start)), (int(x_start + length*math.cos(angle_in_radians)), int(y_start - length*math.sin(angle_in_radians))), int(width))
 
-#pygame.draw.polygon(gameDisplay, black, [(x1, y1), (x2, y2), ...], width=0)
+
+class HumanoidCharacter(object):
+    x_vel = 0
+    y_vel = 0
+    right_arm_angles = [0, 0]
+    left_arm_angles = [0, 180]
+    right_leg_angles = [-90, 0]
+    left_leg_angles = [-90, 0]
+    head_color = (128, 128, 128)
+    torso_color = (255, 255, 255)
+    arm_color = (255, 255, 255)
+    leg_color = (255, 255, 255)
+
+    def __init__(self, x, y, height, surface):
+        self.x = x
+        self.y = y
+        self.height = height
+        self.right_arm_height = 3*height/4
+        self.left_arm_height = 3*height/4
+        self.leg_distance_apart = height/16
+        self.right_arm_lengths = [height/6, height/5]
+        self.left_arm_lengths = [height/6, height/5]
+        self.right_leg_lengths = [height/6, 5*height/24]
+        self.left_leg_lengths = [height/6, 5*height/24]
+        self.head_height = height/6
+        self.torso_width = height/8
+        self.torso_height = 5*height/12
+        self.arm_width = height/72
+        self.leg_width = height/54
+        self.surface = surface
+
+    def draw(self):
+        #torso
+        draw_centered_rectangle(self.x, self.y-self.height+self.torso_height/2+self.head_height, self.torso_width, self.torso_height, self.torso_color, surface=self.surface)
+        #head
+        draw_centered_rectangle(self.x, self.y-self.height+self.head_height/2, self.torso_width, self.head_height, self.head_color, surface=self.surface)
+        #arms
+        draw_line(self.x+(self.torso_width/2), self.y-self.right_arm_height, self.right_arm_angles[0], self.right_arm_lengths[0], self.arm_color, width=self.arm_width)
+        draw_line(self.x+(self.torso_width/2)+self.right_arm_lengths[0]*math.cos(self.right_arm_angles[0]/180.0 * math.pi), self.y-self.right_arm_height-self.right_arm_lengths[0]*math.sin(self.right_arm_angles[0]/180.0 * math.pi), self.right_arm_angles[0]+self.right_arm_angles[1], self.right_arm_lengths[1], self.arm_color, width=self.arm_width)
+        draw_line(self.x-(self.torso_width/2), self.y-self.left_arm_height, -self.left_arm_angles[0], -self.left_arm_lengths[0], self.arm_color, width=self.arm_width)
+        draw_line(self.x-(self.torso_width/2)-self.left_arm_lengths[0]*math.cos(self.left_arm_angles[0]/180.0 * math.pi), self.y-self.left_arm_height-self.left_arm_lengths[0]*math.sin(self.left_arm_angles[0]/180.0 * math.pi), self.left_arm_angles[0]+self.left_arm_angles[1], self.left_arm_lengths[1], self.arm_color, width=self.arm_width)
+        #legs; mid tier
+        draw_line(self.x+(self.leg_distance_apart/2), self.y-self.height+self.head_height+self.torso_height, self.right_leg_angles[0], self.right_leg_lengths[0], self.leg_color, width=self.leg_width)
+        draw_line(self.x+(self.leg_distance_apart/2)+self.right_leg_lengths[0]*math.cos(self.right_leg_angles[0]/180.0 * math.pi), self.y-self.height+self.head_height+self.torso_height-self.right_leg_lengths[0]*math.sin(self.right_leg_angles[0]/180.0 * math.pi), self.right_leg_angles[0]+self.right_leg_angles[1], self.right_leg_lengths[1], self.leg_color, width=self.leg_width)
+        draw_line(self.x-(self.leg_distance_apart/2), self.y-self.height+self.head_height+self.torso_height, -self.left_leg_angles[0], -self.left_leg_lengths[0], self.leg_color, width=self.leg_width)
+        draw_line(self.x-(self.leg_distance_apart/2)-self.left_leg_lengths[0]*math.cos(self.left_leg_angles[0]/180.0 * math.pi), self.y-self.height+self.head_height+self.torso_height-self.left_leg_lengths[0]*math.sin(self.left_leg_angles[0]/180.0 * math.pi), self.left_leg_angles[0]+self.left_leg_angles[1], self.left_leg_lengths[1], self.leg_color, width=self.leg_width)
+
+    def get_funky(self):
+        self.right_arm_angles[0] += 1
+        self.right_arm_angles[1] -= 1
+        self.left_arm_angles[0] += 1
+        self.left_arm_angles[1] -= 1
+        self.right_leg_angles[0] += 1
+        self.right_leg_angles[1] -= 1
+        self.left_leg_angles[0] += 1
+        self.left_leg_angles[1] -= 1
 
 class Sword(object):
     x = None
@@ -70,8 +128,8 @@ class Sword(object):
         #ideas for improvement: make the sword 2 halves, add a line going down the middle, more handle designs
 
 
+character = HumanoidCharacter(400, 300, 200, gameDisplay)
 weapon = Sword(100, 10, gameDisplay)
-weapon.move(400, 300, 0)
 
 angle = 0
 run = True
@@ -79,9 +137,11 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-    gameDisplay.fill((255, 255, 255))
-    weapon.move(400, 300, angle)
+
+    gameDisplay.fill((255, 0, 0))
+    weapon.move(475, 150, angle)
     angle += 1
+    character.draw()
     weapon.draw()
     pygame.display.update()
     clock.tick(25)

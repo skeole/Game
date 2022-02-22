@@ -92,3 +92,5 @@ while run:
     clock.tick(10)
 
 pygame.quit()
+
+#ideas for improvement: make it an object, make it so all the other variables are dependent on height

@@ -19,8 +19,8 @@ def draw_line(x_start, y_start, angle, length, color, surface=gameDisplay, width
 class HumanoidCharacter(object):
     x_vel = 0
     y_vel = 0
-    right_arm_angles = [0, -90]
-    left_arm_angles = [0, -90]
+    right_arm_angles = [0, 0]
+    left_arm_angles = [0, 180]
     right_leg_angles = [-90, 0]
     left_leg_angles = [-90, 0]
     head_color = (128, 128, 128)
@@ -87,3 +87,11 @@ while run:
     clock.tick(30)
 
 pygame.quit()
+
+#ideas for improvement:
+#make it so the character doesnt float - legs should always touch ground
+#head more round
+#legs start above
+#perhaps give a function to return hand and leg positions
+#add clothes and hair
+#MAYBE logos to hair but probably not
