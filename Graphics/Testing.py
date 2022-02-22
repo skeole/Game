@@ -1,7 +1,7 @@
 import pygame
 import math
 import Sword_V1
-import Main_Character_V2
+import Main_Character_V3
 
 pygame.init()
 
@@ -23,21 +23,23 @@ def draw_line(x_start, y_start, angle, length, color, surface=gameDisplay, width
     pygame.draw.line(surface, color, (int(x_start), int(y_start)), (int(x_start + length*math.cos(angle_in_radians)), int(y_start - length*math.sin(angle_in_radians))), int(width))
 
 
-character = Main_Character_V2.HumanoidCharacter(400, 300, 200, gameDisplay)
-weapon = Sword_V1.Sword(100, 10, gameDisplay)
+character = Main_Character_V3.HumanoidCharacter(400, 300, 200, gameDisplay)
+weapon = Sword_V1.Sword(75, 5, gameDisplay)
 
 run = True
 
 weapon.move(475, 150, 0)
-
+angle = 0
 while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
     gameDisplay.fill((255, 0, 0))
-    weapon.angle -= (math.pi/180)
     character.draw()
+    character.update_hand_and_leg_positions()
+    angle += 1
+    weapon.move(character.right_hand_x, character.right_hand_y, angle)
     weapon.draw()
     pygame.display.update()
     clock.tick(25)
