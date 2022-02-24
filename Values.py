@@ -68,12 +68,13 @@ def completely_inside(hitbox1, hitbox2):
             return False
     return True
 
-def hitboxes_intersect(hitbox1, hitbox2):
-    return shells_intersect(hitbox1, hitbox2) or completely_inside(hitbox1, hitbox2) or completely_inside(hitbox2, hitbox1)
-
 def shells_intersect(hitbox1, hitbox2): #only seeing if the outer shells interesect each other
     for i in hitbox1:
         for j in hitbox2:
             if intersect(i[0], i[1], i[2], i[3], j[0], j[1], j[2], j[3]):
                 return True
     return False
+
+def hitboxes_intersect(hitbox1, hitbox2):
+    return shells_intersect(hitbox1, hitbox2) or completely_inside(hitbox1, hitbox2) or completely_inside(hitbox2, hitbox1)
+
