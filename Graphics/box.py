@@ -1,6 +1,5 @@
 import pygame
 import math
-import random
 
 def draw_centered_rectangle(x_center, y_center, width, height, color, surface, fill=0, border_radius=0.0):
     #fill: 0 if fully filled, >1 for line thickness
@@ -18,6 +17,7 @@ class Box(object):
     x = None
     y = None
     angle = None
+    hitbox = []
 
     def __init__(self, size, color, surface):
         self.size = size
@@ -29,14 +29,18 @@ class Box(object):
         self.y = y
         self.angle = -angle*math.pi/180
 
-    #def point_in_hitbox(self, x, y):
+    def update_hitbox(self):
+        self.hitbox = []
+        self.hitbox.append([self.x+self.size*math.cos(math.pi/4 + self.angle), self.y+self.size*math.sin(math.pi/4 + self.angle), self.x+self.size*math.cos(3*math.pi/4 + self.angle), self.y+self.size*math.sin(3*math.pi/4 + self.angle)])
+        self.hitbox.append([self.x+self.size*math.cos(3*math.pi/4 + self.angle), self.y+self.size*math.sin(3*math.pi/4 + self.angle), self.x+self.size*math.cos(5*math.pi/4 + self.angle), self.y+self.size*math.sin(5*math.pi/4 + self.angle)])
+        self.hitbox.append([self.x+self.size*math.cos(5*math.pi/4 + self.angle), self.y+self.size*math.sin(5*math.pi/4 + self.angle), self.x+self.size*math.cos(7*math.pi/4 + self.angle), self.y+self.size*math.sin(7*math.pi/4 + self.angle)])
+        self.hitbox.append([self.x+self.size*math.cos(7*math.pi/4 + self.angle), self.y+self.size*math.sin(7*math.pi/4 + self.angle), self.x+self.size*math.cos(math.pi/4 + self.angle), self.y+self.size*math.sin(math.pi/4 + self.angle)])
 
     def draw(self):
-        min_point = max(0, self.size*math.sin(math.pi/4 + self.angle), self.size*math.sin(3*math.pi/4 + self.angle), self.size*math.sin(5*math.pi/4 + self.angle), self.size*math.sin(7*math.pi/4 + self.angle))
-        pygame.draw.polygon(self.surface, self.color, [(self.x+self.size*math.cos(math.pi/4 + self.angle), self.y+self.size*math.sin(math.pi/4 + self.angle)-min_point),
-                                                       (self.x+self.size*math.cos(3*math.pi/4 + self.angle), self.y+self.size*math.sin(3*math.pi/4 + self.angle)-min_point),
-                                                       (self.x+self.size*math.cos(5*math.pi/4 + self.angle), self.y+self.size*math.sin(5*math.pi/4 + self.angle)-min_point),
-                                                       (self.x+self.size*math.cos(7*math.pi/4 + self.angle), self.y+self.size*math.sin(7*math.pi/4 + self.angle)-min_point)])
+        pygame.draw.polygon(self.surface, self.color, [(self.x+self.size*math.cos(math.pi/4 + self.angle), self.y+self.size*math.sin(math.pi/4 + self.angle)),
+                                                       (self.x+self.size*math.cos(3*math.pi/4 + self.angle), self.y+self.size*math.sin(3*math.pi/4 + self.angle)),
+                                                       (self.x+self.size*math.cos(5*math.pi/4 + self.angle), self.y+self.size*math.sin(5*math.pi/4 + self.angle)),
+                                                       (self.x+self.size*math.cos(7*math.pi/4 + self.angle), self.y+self.size*math.sin(7*math.pi/4 + self.angle))])
 
 
 

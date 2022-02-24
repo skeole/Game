@@ -2,24 +2,24 @@ import pygame
 import Sword_V1
 import Main_Character_V3
 import box
+import Background
 import math
 import time
+import Values
 
 pygame.init()
 
 gameDisplay = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
-black = (0, 0, 0)
-
-#character = Main_Character_V3.HumanoidCharacter(400, 300, 200, gameDisplay)
+#character_1 = Main_Character_V3.HumanoidCharacter(400, 300, 200, gameDisplay)
 #weapon = Sword_V1.Sword(75, 5, gameDisplay)
 #weapon2 = Sword_V1.Sword(75, 5, gameDisplay)
 
-box_1 = box.Box(100, black, gameDisplay)
+box_1 = box.Box(100, Values.black, gameDisplay)
 box_1.move(400, 300, 0)
 
-#character_1 = Main_Character_V3.HumanoidCharacter(400, 300, 200, gameDisplay)
+background_1 = Background.Background(gameDisplay)
 
 x = 400
 angle = 0
@@ -35,19 +35,29 @@ while run:
             pause = not pause
 
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
-        box_1.move(x, 300, angle)
+        box_1.move(x, box_1.y, angle)
         x += 2.5
         angle -= 1.6875
     if pygame.key.get_pressed()[pygame.K_LEFT]:
-        box_1.move(x, 300, angle)
+        box_1.move(x, box_1.y, angle)
         x -= 2.5
         angle += 1.6875
 
+    box_1.update_hitbox()
+    background_1.update_hitbox()
+
+    if Values.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+        box_1.y -= 1
+    else:
+        box_1.y += 1
+
     gameDisplay.fill((0, 0, 255))
+    background_1.draw()
     #character_1.draw()
+    #character_1.get_funky()
     box_1.draw()
     pygame.display.update()
 
-    clock.tick(45)
+    clock.tick(100)
 
 pygame.quit()
