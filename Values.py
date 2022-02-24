@@ -36,7 +36,7 @@ def intersect(x1, y1, x2, y2, x3, y3, x4, y4):
     if x3 == x4:
         x4 += 0.01
     if (y2-y1)/(x2-x1) == (y4-y3)/(x4-x3):
-        return abs((y2-y1)/(x2-x1) - (y3-y1)/(x3-x1)) < 0.1
+        return abs((y2-y1)/(x2-x1) - (y3-y1)/(x3-x1)) < 0.1 #if theres a bug - make this always return False
     else:
         return (point_above_line(x1, y1, x3, y3, x4, y4) != point_above_line(x2, y2, x3, y3, x4, y4)) and (point_above_line(x3, y3, x1, y1, x2, y2) != point_above_line(x4, y4, x1, y1, x2, y2))
 

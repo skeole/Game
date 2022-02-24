@@ -37,11 +37,11 @@ while run:
     if pygame.key.get_pressed()[pygame.K_RIGHT]:
         box_1.move(x, box_1.y, angle)
         x += 2.5
-        angle -= 1.6875
+        angle -= 4
     if pygame.key.get_pressed()[pygame.K_LEFT]:
         box_1.move(x, box_1.y, angle)
         x -= 2.5
-        angle += 1.6875
+        angle += 4
 
     box_1.update_hitbox()
     background_1.update_hitbox()
