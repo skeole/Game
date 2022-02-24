@@ -33,3 +33,6 @@ class Background(object):
     def update_hitbox(self):
         self.hitbox = []
         self.hitbox.append([0, self.height/2, self.width, self.height/2])
+        self.hitbox.append([self.width, self.height/2, self.width, self.height])
+        self.hitbox.append([self.width, self.height, 0, self.height])
+        self.hitbox.append([0, self.height, 0, self.height/2])

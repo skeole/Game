@@ -16,8 +16,8 @@ clock = pygame.time.Clock()
 #weapon = Sword_V1.Sword(75, 5, gameDisplay)
 #weapon2 = Sword_V1.Sword(75, 5, gameDisplay)
 
-box_1 = box.Box(100, Values.black, gameDisplay)
-box_1.move(400, 300, 0)
+box_1 = box.Box(50, Values.black, gameDisplay)
+box_1.move(400, 500, 0)
 
 background_1 = Background.Background(gameDisplay)
 
@@ -47,7 +47,7 @@ while run:
     background_1.update_hitbox()
 
     if Values.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
-        box_1.y -= 1
+        box_1.y -= 5
     else:
         box_1.y += 1
 
@@ -58,6 +58,6 @@ while run:
     box_1.draw()
     pygame.display.update()
 
-    clock.tick(100)
+    clock.tick(25)
 
 pygame.quit()
