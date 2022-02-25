@@ -18,7 +18,6 @@ run = True
 pause = False
 x_vel = 0.0
 y_vel = 0.0
-lastTemp = False
 
 r = math.pi / 4.0 / box_1.size
 
@@ -41,13 +40,34 @@ while run:
     count = 0
     for i in range(15):
         if Values.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+            count += 1
             box_1.y -= 1
             box_1.update_hitbox()
-    if count == 15:
+    if count == 15: #wall basically
         box_1.y += 15
         box_1.angle -= x_vel * r
         box_1.x -= x_vel
         x_vel = 0
+        box_1.update_hitbox()
+    elif x_vel != 0: #we've gone x, count; math.sqrt(x^2 + count^2)
+        if count == 0:
+            count = -1
+            box_1.y += 1
+            for i in range(14):
+                if not Values.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+                    count -= 1
+                    box_1.y += 1
+                    box_1.update_hitbox()
+        if count == -15:
+            count = 0
+            box_1.y -= 15
+            box_1.update_hitbox()
+        box_1.x -= x_vel
+        box_1.angle -= x_vel * r
+        box_1.y += count
+        box_1.x += abs(x_vel)/math.sqrt(x_vel*x_vel+count*count) * x_vel
+        box_1.angle += abs(x_vel)/math.sqrt(x_vel*x_vel+count*count) * x_vel * r
+        box_1.y -= abs(x_vel)/math.sqrt(x_vel*x_vel+count*count) * count
         box_1.update_hitbox()
 
     y_vel += 1
