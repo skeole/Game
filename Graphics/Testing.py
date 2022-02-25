@@ -2,7 +2,7 @@ import pygame
 import Sword_V1
 import Main_Character_V3
 import box
-import Background
+import Background_V1
 import math
 import time
 import Values

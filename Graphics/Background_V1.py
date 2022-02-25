@@ -29,10 +29,14 @@ class Background(object):
     def draw(self):
         if self.level == 1:
             draw_centered_rectangle(self.width/2, self.height*3/4, self.width, self.height/2, Values.red, self.surface)
+            pygame.draw.polygon(self.surface, Values.red, [(self.width/3, self.height/2), (self.width/2, self.height/4), (self.width*2/3, self.height/2)])
 
     def update_hitbox(self):
         self.hitbox = []
-        self.hitbox.append([0, self.height/2, self.width, self.height/2])
+        self.hitbox.append([0, self.height/2, self.width/3, self.height/2])
+        self.hitbox.append([self.width/3, self.height/2, self.width/2, self.height/4])
+        self.hitbox.append([self.width/2, self.height/4, self.width*2/3, self.height/2])
+        self.hitbox.append([self.width*2/3, self.height/2, self.width, self.height/2])
         self.hitbox.append([self.width, self.height/2, self.width, self.height])
         self.hitbox.append([self.width, self.height, 0, self.height])
         self.hitbox.append([0, self.height, 0, self.height/2])

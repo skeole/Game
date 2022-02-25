@@ -1,24 +1,26 @@
 import pygame
 import Values
+import math
 import Graphics.box as box
-import Graphics.Background as background
+import Graphics.Background_V1 as Background
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
-box_1 = box.Box(100, Values.black, gameDisplay)
-box_1.move(400, 200, 0)
+box_1 = box.Box(15, Values.black, gameDisplay)
+box_1.move(200, 20, 0)
 
-background_1 = background.Background(gameDisplay)
+background_1 = Background.Background(gameDisplay)
 background_1.update_hitbox()
 
 run = True
 pause = False
 x_vel = 0.0
 y_vel = 0.0
+lastTemp = False
 
-r = 0.75 / box_1.size
+r = math.pi / 4.0 / box_1.size
 
 while run:
     for event in pygame.event.get():
