@@ -16,7 +16,7 @@ def point_above_line(x, y, x1, y1, x2, y2): #definition of "above": y above line
     if x1 == x2:
         return x > x1
     elif x == x1:
-        return False
+        return y > x1
     elif x > x1:
         return (y-y1)/(x-x1) > (y2-y1)/(x2-x1)
     elif x < x1:

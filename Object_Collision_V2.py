@@ -9,9 +9,9 @@ def point_above_line(point, line): #definition of "above": y above line, or if v
     elif point[0] == line[0][0]:
         return point[1] > line[0][1]
     elif point[0] > line[0][0]:
-        return (point[1]-line[0][1])/(point[0]-line[0][0]) > (line[1][1]-line[0][1])/([1][0]-line[0][0])
+        return (point[1]-line[0][1])/(point[0]-line[0][0]) > (line[1][1]-line[0][1])/(line[1][0]-line[0][0])
     else:
-        return (point[1]-line[0][1])/(point[0]-line[0][0]) < (line[1][1]-line[0][1])/([1][0]-line[0][0])
+        return (point[1]-line[0][1])/(point[0]-line[0][0]) < (line[1][1]-line[0][1])/(line[1][0]-line[0][0])
 
 def point_on_line(point, line):
     if line[0][0] == line[1][0]:
@@ -22,12 +22,14 @@ def point_on_line(point, line):
 def intersect(line_1, line_2):
     if (max(line_1[0][0], line_1[1][0]) < min(line_2[0][0], line_2[1][0])) or (min(line_1[0][0], line_1[1][0]) > max(line_2[0][0], line_2[1][0])) or (max(line_1[0][1], line_1[1][1]) < min(line_2[0][1], line_2[1][1])) or (min(line_1[0][1], line_1[1][1]) > max(line_2[0][1], line_2[1][1])):
         return False #legit zero chance they intersect
+    temp_1 = line_1[1][0]
+    temp_2 = line_2[1][0]
     if line_1[0][0] == line_1[1][0]:
-        line_1[1][0] += 0.01
+        temp_1 += 0.01
     if line_2[0][0] == line_2[1][0]:
-        line_2[1][0] += 0.01
-    if (line_1[1][1]-line_1[0][1])/(line_1[1][0]-line_1[0][0]) == (line_2[1][1]-line_2[0][1])/(line_2[1][0]-line_2[0][0]):
-        return abs((line_1[1][1]-line_1[0][1])/(line_1[1][0]-line_1[0][0]) - (line_2[0][1]-line_1[0][1])/(line_2[0][0]-line_1[0][0])) == 0 #make this return false if we have an issue
+        temp_2 += 0.01
+    if (line_1[1][1]-line_1[0][1])/(temp_1-line_1[0][0]) == (line_2[1][1]-line_2[0][1])/(temp_2-line_2[0][0]):
+        return abs((line_1[1][1]-line_1[0][1])/(temp_1-line_1[0][0]) - (line_2[0][1]-line_1[0][1])/(line_2[0][0]-line_1[0][0])) == 0 #make this return false if we have an issue
     else:
         return (point_above_line(line_1[0], line_2) != point_above_line(line_1[1], line_2)) and (point_above_line(line_2[0], line_1) != point_above_line(line_2[1], line_1))
 

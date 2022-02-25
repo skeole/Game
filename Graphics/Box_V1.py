@@ -41,6 +41,3 @@ class Box(object):
                                                        (self.x+self.size*math.cos(3*math.pi/4 + self.angle), self.y+self.size*math.sin(3*math.pi/4 + self.angle)),
                                                        (self.x+self.size*math.cos(5*math.pi/4 + self.angle), self.y+self.size*math.sin(5*math.pi/4 + self.angle)),
                                                        (self.x+self.size*math.cos(7*math.pi/4 + self.angle), self.y+self.size*math.sin(7*math.pi/4 + self.angle))])
-
-
-
