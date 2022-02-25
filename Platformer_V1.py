@@ -1,5 +1,5 @@
 import pygame
-import Values
+import Object_Collision_V1
 import math
 import Graphics.box as box
 import Graphics.Background_V1 as Background
@@ -8,7 +8,7 @@ pygame.init()
 gameDisplay = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
-box_1 = box.Box(15, Values.black, gameDisplay)
+box_1 = box.Box(15, Object_Collision_V1.black, gameDisplay)
 box_1.move(200, 20, 0)
 
 background_1 = Background.Background(gameDisplay)
@@ -39,7 +39,7 @@ while run:
 
     count = 0
     for i in range(15):
-        if Values.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+        if Object_Collision_V1.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
             count += 1
             box_1.y -= 1
             box_1.update_hitbox()
@@ -54,7 +54,7 @@ while run:
             count = -1
             box_1.y += 1
             for i in range(14):
-                if not Values.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+                if not Object_Collision_V1.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
                     count -= 1
                     box_1.y += 1
                     box_1.update_hitbox()
@@ -73,17 +73,17 @@ while run:
     y_vel += 1
     box_1.y += y_vel
     box_1.update_hitbox()
-    if Values.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+    if Object_Collision_V1.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
         box_1.y -= y_vel
         y_vel = 0
     box_1.y += 1
     box_1.update_hitbox()
-    if Values.hitboxes_intersect(box_1.hitbox, background_1.hitbox) and (pygame.key.get_pressed()[pygame.K_SPACE] or pygame.key.get_pressed()[pygame.K_UP]):
+    if Object_Collision_V1.hitboxes_intersect(box_1.hitbox, background_1.hitbox) and (pygame.key.get_pressed()[pygame.K_SPACE] or pygame.key.get_pressed()[pygame.K_UP]):
         y_vel = -15
     box_1.y -= 1
     box_1.update_hitbox()
 
-    gameDisplay.fill(Values.blue)
+    gameDisplay.fill(Object_Collision_V1.blue)
     box_1.draw()
     background_1.draw()
 

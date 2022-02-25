@@ -25,10 +25,10 @@ class New_Object(object):
             for j in range(len(i)/2):
                 point = (self.x+(i[2*j]-self.x)*math.cos(self.angle)-(i[2*j+1]-self.y)*math.sin(self.angle), 
                          self.y+(i[2*j]-self.x)*math.sin(self.angle)+(i[2*j+1]-self.y)*math.cos(self.angle))
-                polygon.append(point)
+                polygon.append(point) #in form [(x1, y1), (x2, y2), ...]
             self.hitbox.append(polygon)
     
     def draw(self):
         self.update_hitbox()
-        for i in self.hitbox: #for every shape in the hitbox
-            pygame.draw.polygon(self.surface, self.color, i, width=self.width)
+        for polygon in self.hitbox: #for every shape in the hitbox
+            pygame.draw.polygon(self.surface, self.color, polygon, width=self.width)
