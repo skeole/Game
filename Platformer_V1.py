@@ -35,7 +35,7 @@ while run:
     x_vel *= 0.9
     box_1.x += x_vel
     box_1.angle += x_vel * r
-    box_1.update_hitbox()
+    box_1.update_hitbox() #you have to update hitbox whenever you move
 
     count = 0
     for i in range(15):
