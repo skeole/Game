@@ -68,12 +68,12 @@ def shells_intersect(polygon1, polygon2): #only seeing if the outer shells inter
                 return True
     return False
 
-def polygons_intersect(polygon1, polygon2):
-    return shells_intersect(polygon1, polygon2) or completely_inside(polygon1, polygon2) or completely_inside(polygon2, polygon1)
+def polygons_intersect(polygon1, polygon2, accuracy=6):
+    return shells_intersect(polygon1, polygon2) or completely_inside(polygon1, polygon2, accuracy=accuracy) or completely_inside(polygon2, polygon1, accuracy=accuracy)
 
-def hitboxes_intersect(hitbox1, hitbox2):
+def hitboxes_intersect(hitbox1, hitbox2, accuracy=6):
     for i in hitbox1:
         for j in hitbox2:
-            if polygons_intersect(i, j):
+            if polygons_intersect(i, j, accuracy=accuracy):
                 return True
     return False

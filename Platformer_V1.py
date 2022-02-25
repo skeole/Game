@@ -1,14 +1,14 @@
 import pygame
 import Object_Collision_V1
 import math
-import Graphics.box as box
+import Graphics.Box_V1 as Box_V1
 import Graphics.Background_V1 as Background
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
-box_1 = box.Box(15, Object_Collision_V1.black, gameDisplay)
+box_1 = Box_V1.Box(15, Object_Collision_V1.black, gameDisplay)
 box_1.move(200, 20, 0)
 
 background_1 = Background.Background(gameDisplay)

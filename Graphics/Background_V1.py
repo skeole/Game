@@ -1,6 +1,6 @@
 import pygame
 import math
-import Object_Collision_V1
+import Colors
 
 def draw_centered_rectangle(x_center, y_center, width, height, color, surface, fill=0, border_radius=0.0):
     #fill: 0 if fully filled, >1 for line thickness
@@ -28,12 +28,12 @@ class Background(object):
 
     def draw(self):
         if self.level == 1:
-            draw_centered_rectangle(self.width/2, self.height*3/4, self.width, self.height/2, Object_Collision_V1.red, self.surface)
-            pygame.draw.polygon(self.surface, Object_Collision_V1.red, [(self.width/3, self.height/2), (self.width/2, self.height/4), (self.width*2/3, self.height/2)])
+            draw_centered_rectangle(self.width/2, self.height*3/4, self.width, self.height/2, Colors.red, self.surface)
+            pygame.draw.polygon(self.surface, Colors.red, [(self.width/3, self.height/2), (self.width/2, self.height/4), (self.width*2/3, self.height/2)])
 
     def update_hitbox(self):
         self.hitbox = []
-        self.hitbox.append([0, self.height/2, self.width/2, self.height/2])
+        self.hitbox.append([0, self.height/2, self.width/3, self.height/2])
         self.hitbox.append([self.width/3, self.height/2, self.width/2, self.height/4])
         self.hitbox.append([self.width/2, self.height/4, self.width*2/3, self.height/2])
         self.hitbox.append([self.width*2/3, self.height/2, self.width, self.height/2])
