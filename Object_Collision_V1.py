@@ -78,13 +78,6 @@ def shells_intersect(hitbox1, hitbox2): #only seeing if the outer shells interes
 def hitboxes_intersect(hitbox1, hitbox2):
     return shells_intersect(hitbox1, hitbox2) or completely_inside(hitbox1, hitbox2) or completely_inside(hitbox2, hitbox1)
 
-def list_of_hitboxes_intersect(list_of_hitboxes_1, list_of_hitboxes_2):
-    for i in list_of_hitboxes_1:
-        for j in list_of_hitboxes_2:
-            if hitboxes_intersect(i, j):
-                return True
-    return False
-
 def sign(number):
     if number >= 0:
         return 1
