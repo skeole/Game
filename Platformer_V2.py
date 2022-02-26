@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 background_color = Colors.white
 
 #box_1 = Box.Box(10, [Colors.black], gameDisplay)
-#box_1 = Sword.Sword(100, 30, [Colors.black, Colors.gray, Colors.black], gameDisplay)
+sword_1 = Sword.Sword(25, 2, [Colors.black, Colors.gray, Colors.black], gameDisplay)
 box_1 = Main_Character.Main_Character(gameDisplay, 100)
 
 acc = 6
@@ -96,10 +96,14 @@ while run:
         y_vel = -15
     box_1.y -= 1
     box_1.update_hitbox()
+    
+    (sword_1.x, sword_1.y) = box_1.get_arm_and_leg_positions()
+    sword_1.angle = 0
 
     gameDisplay.fill(background_color)
     box_1.draw()
     background_1.draw()
+    sword_1.draw()
 
     pygame.display.update()
     clock.tick(40)

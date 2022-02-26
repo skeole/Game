@@ -144,3 +144,7 @@ class Main_Character(object):
         self.align(self.x, self.y, self.angle)
         for appendage in self.ListOfAppendages:
           appendage.draw()
+    
+    def get_arm_and_leg_positions(self):
+        return (self.right_arm.x + self.arm_lengths[1] * math.cos((self.right_arm_angles[1] + self.angle)*math.pi/180.0)*4/5, 
+                self.right_arm.y - self.arm_lengths[1] * math.sin((self.right_arm_angles[1] + self.angle)*math.pi/180.0)*4/5)
