@@ -18,19 +18,19 @@ sword_1 = Sword.Sword(25, 2, [Colors.black, Colors.gray, Colors.black], gameDisp
 box_1 = Main_Character.Main_Character(gameDisplay, 100)
 
 acc = 6
-max_count = 10
+max_count = 5
 
 background_1 = Background.Background([Colors.blue, Colors.orange], gameDisplay)
 background_1.update_hitbox()
-print(background_1.hitbox)
 box_1.update_hitbox()
 
 run = True
 pause = False
 x_vel = 0.0
 y_vel = 0.0
+max_vel = 10.0
 
-r = 1 #math.pi / 4.0 / box_1.size
+r = 0 #math.pi / 4.0 / box_1.size
 
 while run:
     for event in pygame.event.get():
@@ -45,7 +45,9 @@ while run:
         x_vel -= 1
     if pygame.key.get_pressed()[pygame.K_k]:
         box_1.right_arm_angles[0] += 5
-        box_1.update_arms_and_legs()
+        box_1.update_hitbox()
+        if Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox, accuracy=acc):
+            box_1.right_arm_angles[0] -= 5
     
     x_vel *= 0.9
     box_1.x += x_vel
@@ -63,26 +65,31 @@ while run:
         box_1.x -= x_vel
         x_vel = 0
         box_1.update_hitbox()
-    elif x_vel != 0: #we've gone x, count; math.sqrt(x^2 + count^2)
+    else: #we've gone x, count; math.sqrt(x^2 + count^2)
         if count == 0:
             count = -1
             box_1.y += 1
-            for i in range(max_count-1):
+            box_1.update_hitbox()
+            for i in range(max_count):
                 if not Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox, accuracy=acc):
                     count -= 1
                     box_1.y += 1
                     box_1.update_hitbox()
+            count += 1
+            box_1.y -= 1
+            box_1.update_hitbox()
         if count == -max_count:
             count = 0
             box_1.y -= max_count
             box_1.update_hitbox()
-        box_1.x -= x_vel
-        box_1.angle -= x_vel * r
-        box_1.y += count
-        box_1.x += abs(x_vel)/math.sqrt(x_vel*x_vel+count*count) * x_vel
-        box_1.angle += abs(x_vel)/math.sqrt(x_vel*x_vel+count*count) * x_vel * r
-        box_1.y -= abs(x_vel)/math.sqrt(x_vel*x_vel+count*count) * count
-        box_1.update_hitbox()
+        elif math.sqrt(x_vel*x_vel+count*count) > max_vel:
+            box_1.x -= x_vel
+            box_1.angle -= x_vel * r
+            box_1.y += count
+            box_1.x += max_vel/math.sqrt(x_vel*x_vel+count*count) * x_vel
+            box_1.angle += max_vel/math.sqrt(x_vel*x_vel+count*count) * x_vel * r
+            box_1.y -= max_vel/math.sqrt(x_vel*x_vel+count*count) * count
+            box_1.update_hitbox()
     
     y_vel += 1
     box_1.y += y_vel
