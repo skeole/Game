@@ -7,11 +7,11 @@ class New_Object(object):
     x = 0
     y = 0
     angle = 0
-    def __init__(self, ListOfPoints, color, surface, border_width=0): #should be a nested list
+    def __init__(self, ListOfPoints, ListOfColors, surface, border_width=0): #should be a nested list
                             #ex. [[(2, 3), (4, 5)], [(6, 7), (8, 9)]] -> 2 objects with points
                             #2, 3 and 4, 5 for object 1 and 6, 7 and 8, 9 for object 2
         self.ListOfPoints = ListOfPoints
-        self.color = color
+        self.ListOfColors = ListOfColors
         self.surface = surface
         self.border_width = border_width
         
@@ -30,5 +30,5 @@ class New_Object(object):
     
     def draw(self):
         self.update_hitbox()
-        for polygon in self.hitbox: #for every shape in the hitbox
-            pygame.draw.polygon(self.surface, self.color, polygon, width=self.border_width)
+        for i in range(len(self.hitbox)): #for every shape in the hitbox
+            pygame.draw.polygon(self.surface, self.ListOfColors[i], self.hitbox[i], width=self.border_width)

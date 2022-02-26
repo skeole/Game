@@ -3,7 +3,9 @@ import Object_Collision_V2 as Collision
 import math
 import Colors
 import Graphics.Box_V2 as Box
+import Graphics.Sword_V2 as Sword
 import Graphics.Background_V2 as Background
+import Graphics.Main_Character_V2 as Main_Character
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800, 600))
@@ -11,19 +13,24 @@ clock = pygame.time.Clock()
 
 background_color = Colors.white
 
-box_1 = Box.Box(15, Colors.black, gameDisplay)
+#box_1 = Box.Box(10, [Colors.black], gameDisplay)
+#box_1 = Sword.Sword(100, 30, [Colors.black, Colors.gray, Colors.black], gameDisplay)
+box_1 = Main_Character.Main_Character(gameDisplay, 100)
 
-acc = 15
+acc = 6
+max_count = 10
 
-background_1 = Background.Background(Colors.blue, gameDisplay)
+background_1 = Background.Background([Colors.blue, Colors.orange], gameDisplay)
 background_1.update_hitbox()
+print(background_1.hitbox)
+box_1.update_hitbox()
 
 run = True
 pause = False
 x_vel = 0.0
 y_vel = 0.0
 
-r = math.pi / 4.0 / box_1.size
+r = 1 #math.pi / 4.0 / box_1.size
 
 while run:
     for event in pygame.event.get():
@@ -36,19 +43,22 @@ while run:
         x_vel += 1
     if pygame.key.get_pressed()[pygame.K_LEFT]:
         x_vel -= 1
+    if pygame.key.get_pressed()[pygame.K_k]:
+        box_1.right_arm_angles[0] += 5
+        box_1.update_arms_and_legs()
     
     x_vel *= 0.9
     box_1.x += x_vel
     box_1.angle += x_vel * r
     box_1.update_hitbox() #you have to update hitbox whenever you move
     count = 0
-    for i in range(15):
+    for i in range(max_count):
         if Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox, accuracy=acc):
             count += 1
             box_1.y -= 1
             box_1.update_hitbox()
-    if count == 15: #wall basically
-        box_1.y += 15
+    if count == max_count: #wall basically
+        box_1.y += max_count
         box_1.angle -= x_vel * r
         box_1.x -= x_vel
         x_vel = 0
@@ -57,14 +67,14 @@ while run:
         if count == 0:
             count = -1
             box_1.y += 1
-            for i in range(14):
+            for i in range(max_count-1):
                 if not Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox, accuracy=acc):
                     count -= 1
                     box_1.y += 1
                     box_1.update_hitbox()
-        if count == -15:
+        if count == -max_count:
             count = 0
-            box_1.y -= 15
+            box_1.y -= max_count
             box_1.update_hitbox()
         box_1.x -= x_vel
         box_1.angle -= x_vel * r
@@ -73,7 +83,7 @@ while run:
         box_1.angle += abs(x_vel)/math.sqrt(x_vel*x_vel+count*count) * x_vel * r
         box_1.y -= abs(x_vel)/math.sqrt(x_vel*x_vel+count*count) * count
         box_1.update_hitbox()
-
+    
     y_vel += 1
     box_1.y += y_vel
     box_1.update_hitbox()

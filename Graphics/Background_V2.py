@@ -1,7 +1,7 @@
 import Graphics.Object_Template as Object_Template
 
 class Background(Object_Template.New_Object):
-    def __init__(self, color, surface):
+    def __init__(self, ListOfColors, surface):
         self.window_height = surface.get_height()
         self.window_width = surface.get_width()
         self.ListOfPoints = [[(0, self.window_height/2), 
@@ -15,7 +15,7 @@ class Background(Object_Template.New_Object):
                               (self.window_width, self.window_height*2/5), 
                               (self.window_width, self.window_height/3), 
                               (self.window_width*3/4, self.window_height/3)]]
-        super().__init__(self.ListOfPoints, color, surface)
+        super().__init__(self.ListOfPoints, ListOfColors, surface)
         
         self.x = 0
         self.y = 0
