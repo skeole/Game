@@ -30,7 +30,7 @@ x_vel = 0.0
 y_vel = 0.0
 max_vel = 10.0
 
-r = -0.3 #math.pi / 4.0 / box_1.size
+r = 0 #math.pi / 4.0 / box_1.size
 
 while run:
     for event in pygame.event.get():
@@ -46,8 +46,15 @@ while run:
     if pygame.key.get_pressed()[pygame.K_k]:
         box_1.right_arm_angles[0] += 5
         box_1.update_hitbox()
-        if Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox, accuracy=acc):
+        count = 0
+        for i in range(max_count):
+            if Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox, accuracy=acc):
+                count += 1
+                box_1.y -= 1
+                box_1.update_hitbox()
+        if count == max_count:
             box_1.right_arm_angles[0] -= 5
+        box_1.y += count
     
     x_vel *= 0.9
     box_1.x += x_vel
