@@ -30,7 +30,7 @@ x_vel = 0.0
 y_vel = 0.0
 max_vel = 10.0
 
-r = 0 #math.pi / 4.0 / box_1.size
+r = -math.pi #math.pi / 4.0 / box_1.size
 
 while run:
     for event in pygame.event.get():
