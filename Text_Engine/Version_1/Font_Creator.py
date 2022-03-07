@@ -1,3 +1,4 @@
+from re import L
 import pygame
 
 import sys
@@ -16,7 +17,7 @@ clock = pygame.time.Clock()
 list_of_buttons = []
 for i in range(66):
     list_of_buttons.append(Object_Template.New_Object([Special_Shapes.polygon_for_line(
-        (0, 0), (0, 0), 15, smoothness=8
+        (0, 0), (0, 0), 15, smoothness=5
     )], [Colors.black], gameDisplay))
 
 for i in range(6):
@@ -42,6 +43,19 @@ while run:
             mouse_clicked = True
     
     mouse_pos = pygame.mouse.get_pos()
+    
+    if pygame.key.get_pressed()[pygame.K_p]:
+        if letter != []:
+            maximum = 0
+            for i in letter:
+                for j in range(1, len(i)):
+                    maximum = max(maximum, i[j][0])
+
+            letter.insert(0, maximum)
+            print(str(letter) + ", ")
+            letter = []
+            last_button_pressed = -1
+            list_of_lines = []
             
     gameDisplay.fill(Colors.white)
     for i in range(6):
@@ -74,7 +88,9 @@ while run:
             ))
             letter.append(["l", (10 * int(last_button_pressed / 11), 10 * (last_button_pressed % 11)), 
                 (10 * int(button_pressed / 11), 10 * (button_pressed % 11))])
-        last_button_pressed = button_pressed
+            last_button_pressed = -1
+        else:
+            last_button_pressed = button_pressed
     if last_button_pressed != -1:
         pygame.draw.polygon(gameDisplay, Colors.red, list_of_buttons[last_button_pressed].hitbox[0])
     for i in list_of_lines:
@@ -84,10 +100,3 @@ while run:
     clock.tick(20)
 
 pygame.quit()
-maximum = 0
-for i in letter:
-    for j in range(1, len(i)):
-        maximum = max(maximum, i[j][0])
-
-letter.insert(0, maximum)
-print(letter)

@@ -40,10 +40,10 @@ while run:
     #pygame.draw.polygon(gameDisplay, Colors.gray, Text_Engine.polygon_for_line(point_2, point_3, 5))
     
     #print(pygame.mouse.get_pos())
-    TE.type("aa", Fonts.bezier, pygame.mouse.get_pos(), 1, 1, Colors.black, 4, angle=angle, space_between_letters=20, italics=0.1)
+    TE.type("skeole", Fonts.block, pygame.mouse.get_pos(), 0.5, 0.5, Colors.black, 3, angle=angle, space_between_letters=8, italics=0.0)
     
     pygame.display.update()
-    angle += 5
+    angle += 0
     clock.tick(20)
 
 pygame.quit()
