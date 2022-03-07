@@ -3,44 +3,91 @@ import pygame
 import sys
 sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
 
+import Collision_Detection.Version_2 as Collision
 import Graphics.Colors as Colors
-import Text_Engine.Version_1.Engine as Text_Engine
+import Graphics.Special_Shapes as Special_Shapes
+import Graphics.Object_Template as Object_Template
 
 pygame.init()
 
 gameDisplay = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
-TE = Text_Engine.Text_Engine_V1(gameDisplay)
+list_of_buttons = []
+for i in range(66):
+    list_of_buttons.append(Object_Template.New_Object([Special_Shapes.polygon_for_line(
+        (0, 0), (0, 0), 15, smoothness=8
+    )], [Colors.black], gameDisplay))
+
+for i in range(6):
+    for j in range(11):
+        list_of_buttons[11*i+j].x = 275+50*i
+        list_of_buttons[11*i+j].y = 550-50*j
+        list_of_buttons[6*i+j].update_hitbox()
+
+last_button_pressed = -1
+list_of_lines = []
+letter = []
 
 run = True
 pause = False
-angle = 0
 while run:
+    mouse_clicked = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.KEYDOWN:
             pause = not pause
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_clicked = True
+    
+    mouse_pos = pygame.mouse.get_pos()
             
-    gameDisplay.fill(Colors.green)
-    #point_1 = (random.random()*600+100, random.random()*400+100)
-    #point_2 = (random.random()*600+100, random.random()*400+100)
-    #point_3 = (random.random()*600+100, random.random()*400+100)
+    gameDisplay.fill(Colors.white)
+    for i in range(6):
+        x = 275+50*i
+        y = 50
+        pygame.draw.polygon(gameDisplay, Colors.gray, Special_Shapes.polygon_for_line(
+            (x, y), (x, y+500), 4, smoothness=4
+        ))
     
-    #Bezier_Data = Text_Engine.polygons_for_bezier(point_1, point_2, point_3, 5, smoothness=40)
+    for i in range(11):
+        x = 275
+        y = 50+50*i
+        pygame.draw.polygon(gameDisplay, Colors.gray, Special_Shapes.polygon_for_line(
+            (x, y), (x+250, y), 4, smoothness=4
+        ))
     
-    #for i in Bezier_Data:
-        #pygame.draw.polygon(gameDisplay, Colors.black, i)
+    button_pressed = -1
     
-    #pygame.draw.polygon(gameDisplay, Colors.gray, Text_Engine.polygon_for_line(point_1, point_2, 5))
-    #pygame.draw.polygon(gameDisplay, Colors.gray, Text_Engine.polygon_for_line(point_2, point_3, 5))
+    for i in range(66):
+        list_of_buttons[i].draw()
+        if mouse_clicked:
+            if Collision.point_inside_polygon(mouse_pos, list_of_buttons[i].hitbox[0]):
+                button_pressed = i
     
-    #print(pygame.mouse.get_pos())
-    TE.type("aa", pygame.mouse.get_pos(), 1, 1, Colors.black, 2, angle=angle, space_between_letters=20, italics=0.1)
+    if button_pressed != -1:
+        if last_button_pressed != -1:
+            list_of_lines.append(Special_Shapes.polygon_for_line(
+                (list_of_buttons[last_button_pressed].x, list_of_buttons[last_button_pressed].y), 
+                (list_of_buttons[button_pressed].x, list_of_buttons[button_pressed].y), 4, smoothness=4
+            ))
+            letter.append(["l", (10 * int(last_button_pressed / 11), 10 * (last_button_pressed % 11)), 
+                (10 * int(button_pressed / 11), 10 * (button_pressed % 11))])
+        last_button_pressed = button_pressed
+    if last_button_pressed != -1:
+        pygame.draw.polygon(gameDisplay, Colors.red, list_of_buttons[last_button_pressed].hitbox[0])
+    for i in list_of_lines:
+        pygame.draw.polygon(gameDisplay, Colors.red, i)
     
     pygame.display.update()
-    angle += 5
     clock.tick(20)
 
 pygame.quit()
+maximum = 0
+for i in letter:
+    for j in range(1, len(i)):
+        maximum = max(maximum, i[j][0])
+
+letter.insert(0, maximum)
+print(letter)

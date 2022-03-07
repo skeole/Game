@@ -7,6 +7,7 @@ sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
 
 import Graphics.Colors as Colors
 import Text_Engine.Version_1.Engine as Text_Engine
+import Text_Engine.Version_1.Fonts as Fonts
 
 pygame.init()
 
@@ -39,7 +40,7 @@ while run:
     #pygame.draw.polygon(gameDisplay, Colors.gray, Text_Engine.polygon_for_line(point_2, point_3, 5))
     
     #print(pygame.mouse.get_pos())
-    TE.type("aa", pygame.mouse.get_pos(), 1, 1, Colors.black, 2, angle=angle, space_between_letters=20, italics=0.1)
+    TE.type("aa", Fonts.bezier, pygame.mouse.get_pos(), 1, 1, Colors.black, 4, angle=angle, space_between_letters=20, italics=0.1)
     
     pygame.display.update()
     angle += 5
