@@ -1,6 +1,9 @@
-import Text_Engine.Fonts.Font_1 as Font_1
-import math
 import pygame
+import math
+
+import sys
+sys.path.append("/Users/shaankeole/Desktop/Coding/Game")
+import Text_Engine.Fonts.Font_1 as Font_1
 
 def polygon_for_line(point_1, point_2, width):
     radius = float(width)/2
