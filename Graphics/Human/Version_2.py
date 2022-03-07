@@ -1,5 +1,5 @@
 import Graphics.Object_Template as Object_Template
-import Colors
+import Graphics.Colors as Colors
 import math
 
 class Main_Character(object):

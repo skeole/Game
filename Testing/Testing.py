@@ -2,7 +2,7 @@ import pygame
 import math
 import time
 import random
-import Colors
+import Graphics.Colors as Colors
 import Text_Engine.Text_Engine as Text_Engine
 
 import Graphics.Main_Character_V2

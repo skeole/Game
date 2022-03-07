@@ -1,6 +1,6 @@
 import pygame
 import math
-import Colors
+import Graphics.Colors as Colors
 
 def draw_centered_rectangle(x_center, y_center, width, height, color, surface, fill=0, border_radius=0.0):
     #fill: 0 if fully filled, >1 for line thickness

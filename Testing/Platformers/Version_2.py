@@ -1,7 +1,7 @@
 import pygame
 import Object_Collision_V2 as Collision
 import math
-import Colors
+import Graphics.Colors as Colors
 import Graphics.Box_V2 as Box
 import Graphics.Sword_V2 as Sword
 import Graphics.Background_V2 as Background
