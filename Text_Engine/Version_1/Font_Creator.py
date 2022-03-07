@@ -1,7 +1,10 @@
 import pygame
+
 import sys
-sys.path.append("Game/Colors")
+sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
+
 import Graphics.Colors as Colors
+import Text_Engine.Version_1.Engine as Text_Engine
 
 pygame.init()
 

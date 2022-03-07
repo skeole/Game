@@ -1,11 +1,12 @@
 import pygame
 import math
-import time
 import random
-import Graphics.Colors as Colors
-import Text_Engine.Text_Engine as Text_Engine
 
-import Graphics.Main_Character_V2
+import sys
+sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
+
+import Graphics.Colors as Colors
+import Text_Engine.Version_1.Engine as Text_Engine
 
 pygame.init()
 

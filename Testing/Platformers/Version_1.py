@@ -1,14 +1,19 @@
 import pygame
-import Object_Collision_V1
 import math
-import Graphics.Box_V1 as Box_V1
-import Graphics.Background_V1 as Background
+
+import sys
+sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
+
+import Graphics.Colors as Colors
+import Collision_Detection.Version_1 as Collision
+import Graphics.Box.Version_1 as Box
+import Graphics.Background.Version_1 as Background
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800, 600))
 clock = pygame.time.Clock()
 
-box_1 = Box_V1.Box(15, Object_Collision_V1.black, gameDisplay)
+box_1 = Box.Box(15, Colors.black, gameDisplay)
 box_1.move(200, 20, 0)
 
 background_1 = Background.Background(gameDisplay)
@@ -39,7 +44,7 @@ while run:
 
     count = 0
     for i in range(15):
-        if Object_Collision_V1.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+        if Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
             count += 1
             box_1.y -= 1
             box_1.update_hitbox()
@@ -54,7 +59,7 @@ while run:
             count = -1
             box_1.y += 1
             for i in range(14):
-                if not Object_Collision_V1.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+                if not Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
                     count -= 1
                     box_1.y += 1
                     box_1.update_hitbox()
@@ -73,17 +78,17 @@ while run:
     y_vel += 1
     box_1.y += y_vel
     box_1.update_hitbox()
-    if Object_Collision_V1.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
+    if Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox):
         box_1.y -= y_vel
         y_vel = 0
     box_1.y += 1
     box_1.update_hitbox()
-    if Object_Collision_V1.hitboxes_intersect(box_1.hitbox, background_1.hitbox) and (pygame.key.get_pressed()[pygame.K_SPACE] or pygame.key.get_pressed()[pygame.K_UP]):
+    if Collision.hitboxes_intersect(box_1.hitbox, background_1.hitbox) and (pygame.key.get_pressed()[pygame.K_SPACE] or pygame.key.get_pressed()[pygame.K_UP]):
         y_vel = -15
     box_1.y -= 1
     box_1.update_hitbox()
 
-    gameDisplay.fill(Object_Collision_V1.blue)
+    gameDisplay.fill(Colors.blue)
     box_1.draw()
     background_1.draw()
 

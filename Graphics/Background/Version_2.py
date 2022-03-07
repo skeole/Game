@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
+
 import Graphics.Object_Template as Object_Template
 
 class Background(Object_Template.New_Object):

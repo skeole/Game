@@ -1,11 +1,17 @@
 import pygame
-import Object_Collision_V2 as Collision
 import math
+
+import sys
+sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
+
 import Graphics.Colors as Colors
-import Graphics.Box_V2 as Box
-import Graphics.Sword_V2 as Sword
-import Graphics.Background_V2 as Background
-import Graphics.Main_Character_V2 as Main_Character
+import Collision_Detection.Version_2 as Collision
+import Graphics.Box.Version_2 as Box
+import Graphics.Sword.Version_2 as Sword
+import Graphics.Background.Version_2 as Background
+import Graphics.Human.Version_2 as Main_Character
+
+
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800, 600))
@@ -30,7 +36,7 @@ x_vel = 0.0
 y_vel = 0.0
 max_vel = 10.0
 
-r = -math.pi #math.pi / 4.0 / box_1.size
+r = -0.1 #-math.pi #math.pi / 4.0 / box_1.size
 
 while run:
     for event in pygame.event.get():

@@ -1,6 +1,5 @@
 import math
 
-
 def point_above_line(point, line): #definition of "above": y above line, or if vertical, then x value greater
     #point format: (x, y)
     #line format: [(x1, y1), (x2, y2)]

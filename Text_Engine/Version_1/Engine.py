@@ -2,7 +2,8 @@ import pygame
 import math
 
 import sys
-sys.path.append("/Users/shaankeole/Desktop/Coding/Game")
+sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
+
 import Text_Engine.Fonts.Font_1 as Font_1
 
 def polygon_for_line(point_1, point_2, width):

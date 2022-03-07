@@ -1,17 +1,5 @@
 import math
 
-black = (0, 0, 0)
-white = (234, 234, 234)
-gray = (128, 128, 128)
-
-red = (255, 0, 0)
-green = (0, 255, 0)
-blue = (0, 0, 255)
-
-orange = (255, 128, 0)
-yellow = (153, 153, 0)
-lime = (76, 153, 0)
-
 def point_above_line(x, y, x1, y1, x2, y2): #definition of "above": y above line, or if vertical, then x value greater
     if x1 == x2:
         return x > x1
@@ -77,9 +65,3 @@ def shells_intersect(hitbox1, hitbox2): #only seeing if the outer shells interes
 
 def hitboxes_intersect(hitbox1, hitbox2):
     return shells_intersect(hitbox1, hitbox2) or completely_inside(hitbox1, hitbox2) or completely_inside(hitbox2, hitbox1)
-
-def sign(number):
-    if number >= 0:
-        return 1
-    if number < 0:
-        return -1
