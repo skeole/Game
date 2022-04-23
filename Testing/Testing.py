@@ -3,7 +3,7 @@ import math
 import random
 
 import sys
-sys.path.insert(1, '/Users/shaankeole/Desktop/Coding/Game')
+sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/Game')
 
 import Graphics.Colors as Colors
 import Text_Engine.Version_1.Engine as Text_Engine
@@ -40,10 +40,10 @@ while run:
     #pygame.draw.polygon(gameDisplay, Colors.gray, Text_Engine.polygon_for_line(point_2, point_3, 5))
     
     #print(pygame.mouse.get_pos())
-    TE.type("skeole", Fonts.block, pygame.mouse.get_pos(), 0.5, 0.5, Colors.black, 3, angle=angle, space_between_letters=8, italics=0.0)
+    TE.type("hjlfsbhljb", Fonts.block, pygame.mouse.get_pos(), 0.5, 0.5, Colors.black, 3, angle=angle, space_between_letters=8, italics=0.1)
     
     pygame.display.update()
-    angle += 0
+    angle += 1
     clock.tick(20)
 
 pygame.quit()
