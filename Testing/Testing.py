@@ -40,7 +40,7 @@ while run:
     #pygame.draw.polygon(gameDisplay, Colors.gray, Text_Engine.polygon_for_line(point_2, point_3, 5))
     
     #print(pygame.mouse.get_pos())
-    TE.type("hjlfsbhljb", Fonts.block, pygame.mouse.get_pos(), 0.5, 0.5, Colors.black, 3, angle=angle, space_between_letters=8, italics=0.1)
+    TE.type("aaabab", Fonts.bezier, pygame.mouse.get_pos(), 2.0, 2.0, Colors.black, 3, angle=angle, space_between_letters=8, italics=0.5)
     
     pygame.display.update()
     angle += 1
