@@ -1,6 +1,9 @@
 import pygame
 import math
 
+import sys
+sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/Game')
+
 black = (0, 0, 0)
 
 def draw_centered_rectangle(x_center, y_center, width, height, color, surface, fill=0, border_radius=0.0):

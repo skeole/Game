@@ -6,8 +6,8 @@ sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/Game')
 
 import Graphics.Colors as Colors
 import Collision_Detection.Version_1 as Collision
-import Graphics.Box.Version_1 as Box
-import Graphics.Background.Version_1 as Background
+import Testing.Platformers.Box.Version_1 as Box
+import Testing.Platformers.Background.Version_1 as Background
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((800, 600))

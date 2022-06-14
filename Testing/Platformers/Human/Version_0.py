@@ -2,6 +2,9 @@ import pygame
 import math
 import time
 
+import sys
+sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/Game')
+
 pygame.init()
 clock = pygame.time.Clock()
 

@@ -1,6 +1,9 @@
 import pygame
 import math
 
+import sys
+sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/Game')
+
 def draw_centered_rectangle(x_center, y_center, width, height, color, surface, fill=0, border_radius=0.0):
     #fill: 0 if fully filled, >1 for line thickness
     pygame.draw.rect(surface, color, [int(x_center - (width/2)), int(y_center - (height/2)), int(width), int(height)], width=int(fill), border_radius=int(border_radius))

@@ -6,10 +6,10 @@ sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/Game')
 
 import Graphics.Colors as Colors
 import Collision_Detection.Version_2 as Collision
-import Graphics.Box.Version_2 as Box
-import Graphics.Sword.Version_2 as Sword
-import Graphics.Background.Version_2 as Background
-import Graphics.Human.Version_2 as Main_Character
+import Testing.Platformers.Box.Version_2 as Box
+import Testing.Platformers.Sword.Version_2 as Sword
+import Testing.Platformers.Background.Version_2 as Background
+import Testing.Platformers.Human.Version_2 as Main_Character
 
 
 
