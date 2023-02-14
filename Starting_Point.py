@@ -19,7 +19,7 @@ mouse_released = False
 mouse_down = False
 last_mouse_position = (0, 0)
 mouse_position = (0, 0)
-mouse_change = (0, 0)
+mouse_change = [0, 0]
 
 background_color = (0, 0, 0)
 
