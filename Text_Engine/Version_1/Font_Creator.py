@@ -2,7 +2,7 @@ from re import L
 import pygame
 
 import sys
-sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/Game')
+sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/PythonProjects/Pygame/Game')
 
 import Collision_Detection.Version_2 as Collision
 import Graphics.Colors as Colors

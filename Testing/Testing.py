@@ -3,7 +3,7 @@ import math
 import random
 
 import sys
-sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/Game')
+sys.path.insert(1, '/Users/shaankeole/Downloads/Coding/PythonProjects/Pygame/Game')
 
 import Graphics.Colors as Colors
 import Text_Engine.Version_1.Engine as Text_Engine
@@ -46,7 +46,7 @@ while run:
     gameDisplay.fill(Colors.green)
     
     if mouse_down:
-        TE.type("mouse down", Fonts.block, (120, 50), 0.33, 0.30, Colors.black, 1, space_between_letters=3)
+        TE.type("01234567890,.()", Fonts.numbers, (120, 50), 0.33, 0.30, Colors.black, 1, space_between_letters=3)
     
     if mouse_clicked and Collision_Detection.point_inside_polygon(mouse, c.main.hitbox[0]):
         c.on_clicked(mouse[0], mouse[1])
